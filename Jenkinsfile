@@ -21,8 +21,7 @@ pipeline {
                         sh '''
                             #!/bin/bash
                             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                            docker build .
-                            docker tag iamgreatoni/amsterdam-app iamgreatoni/amsterdam-app:latest
+                            docker build -t iamgreatoni/amsterdam-app:latest .
                             docker push iamgreatoni/amsterdam-app:latest
                             docker tag iamgreatoni/amsterdam-app iamgreatoni/amsterdam-app:$BUILD_NUMBER
                             docker push iamgreatoni/amsterdam-app:$BUILD_NUMBER
@@ -33,8 +32,7 @@ pipeline {
                             sh '''
                                 #!/bin/bash
                                 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                                docker build .
-                                docker tag iamgreatoni/amsterdam-app:test iamgreatoni/amsterdam-app:test
+                                docker build -t iamgreatoni/amsterdam-app:test .
                                 docker push iamgreatoni/amsterdam-app:test
                             '''   
                     }
@@ -43,8 +41,7 @@ pipeline {
                             sh '''
                                 #!/bin/bash
                                 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-                                docker build .
-                                docker tag iamgreatoni/amsterdam-app:staging iamgreatoni/amsterdam-app:staging
+                                docker build -t iamgreatoni/amsterdam-app:staging .
                                 docker push iamgreatoni/amsterdam-app:staging
                             '''   
                         }
