@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amsterdam-app-staging
+  namespace: staging
+  labels:
+    app: amsterdam-app-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amsterdam-app-staging
+  template:
+    metadata:
+      labels:
+        app: amsterdam-app-staging
+    spec:
+      containers:
+        - name: amsterdam-staging
+          image: iamgreatoni/amsterdam-app:staging
+          ports:
+            - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: amsterdam-app-staging-svc
+  namespace: staging
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: amsterdam-app-staging

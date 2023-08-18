@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amsterdam-app
+  namespace: production
+  labels:
+    app: amsterdam-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amsterdam-app
+  template:
+    metadata:
+      labels:
+        app: amsterdam-app
+    spec:
+      containers:
+        - name: amsterdam
+          image: iamgreatoni/amsterdam-app:latest
+          ports:
+            - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: amsterdam-app-svc
+  namespace: production
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+  selector:
+    app: amsterdam-app
