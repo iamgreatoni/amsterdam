@@ -22,6 +22,7 @@ pipeline {
                             #!/bin/bash
                             docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
                             docker build .
+                            docker tag iamgreatoni/amsterdam-app iamgreatoni/amsterdam-app
                             docker push iamgreatoni/amsterdam-app
                             docker tag iamgreatoni/amsterdam-app iamgreatoni/amsterdam-app:$BUILD_NUMBER
                             docker push iamgreatoni/amsterdam-app:$BUILD_NUMBER
