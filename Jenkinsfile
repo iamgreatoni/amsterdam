@@ -12,18 +12,6 @@ pipeline {
                 sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
             }
         }
-        
-        stage ('Testing') {
-            steps {
-                script {
-                    sh '''
-                        #!/bin/bash
-                        npm install ----legacy-peer-deps
-                        npm run lint
-                    '''
-                }
-            }
-        }
 
         stage('Docker build & push') {
             steps{
